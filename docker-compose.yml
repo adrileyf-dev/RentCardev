@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  database_dev:
+    image: postgres
+    container_name: database_dev
+    restart: always
+    ports:
+      - 5438:5432
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=dev
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    networks:
+      - devnet
+
+  app:
+    build: .
+    container_name: rentex
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/app
+    depends_on:
+      - database_dev
+    networks:
+      - devnet
+
+networks:
+  devnet:
+    driver: bridge

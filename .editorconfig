@@ -1,0 +1,25 @@
+# Indica que este é o arquivo de configuração principal
+root = true
+
+# Regras padrão para todos os arquivos
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+# Regras específicas para arquivos Markdown (evita remover espaços ao final de linha, pois às vezes são necessários)
+[*.md]
+trim_trailing_whitespace = false
+
+# Regras para arquivos JSON (como package.json)
+[*.json]
+indent_style = space
+indent_size = 2
+
+# Regras para arquivos YAML (como .github/workflows/*.yml)
+[*.yml]
+indent_style = space
+indent_size = 2
