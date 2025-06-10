@@ -1,15 +1,11 @@
-import { CategoriesRepositories } from "../../repositories/CategoriesRepositories";
-import { ListCategoryController } from "./ListCategoryController";
-import { ListCategoryUserCase } from "./ListCategoryUserCase";
+import { ListCategoryController } from './ListCategoryController';
+import { ListCategoryUserCase } from './ListCategoryUserCase';
 
- const categoriesRepositories =  CategoriesRepositories.getIntence();
+const categoriesRepositories = null;
 
-const listCategoryUserCase       = new ListCategoryUserCase(categoriesRepositories);
-const IndexListCategoryContoller = new ListCategoryController(listCategoryUserCase);
+const listCategoryUserCase = new ListCategoryUserCase(categoriesRepositories);
+const IndexListCategoryContoller = new ListCategoryController(
+  listCategoryUserCase,
+);
 
-
-
-
-
-export{IndexListCategoryContoller}
-
+export { IndexListCategoryContoller };

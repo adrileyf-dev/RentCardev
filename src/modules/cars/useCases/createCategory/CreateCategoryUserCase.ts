@@ -1,15 +1,21 @@
+import { ICreateCategoriaDto } from '../../../../Dto/ICreateCategoriaDto';
+import { ICategoriesRepositories } from '../../Interface/ICategoriesRepositories';
+import { inject, injectable } from 'tsyringe';
 
-import { ICreateCategoriaDto } from "../../../../Dto/ICreateCategoriaDto";
-import { ICategoriesRepositories } from "../../Interface/ICategoriesRepositories"; 
-class CreateCategoryUserCase{
-  constructor(private categoryRepository : ICategoriesRepositories){}
+@injectable()
+class CreateCategoryUserCase {
+  constructor(
+    @inject('CategoriesRepository')
+    private categoryRepository: ICategoriesRepositories,
+  ) {}
 
-    execute({name, description}:ICreateCategoriaDto):void{
-         const categoryAlreadExists  = this.categoryRepository.findByName(name);
-             if(categoryAlreadExists) {
-                throw new Error("Category Already existe! ")
-             }            
-           this.categoryRepository.create({name,description});    
+  async execute({ name, description }: ICreateCategoriaDto): Promise<void> {
+    const categoryAlreadExists = await this.categoryRepository.findByName(name);
+
+    if (categoryAlreadExists) {
+      throw new Error('Category Already existessss! ');
     }
+    this.categoryRepository.create({ name, description });
+  }
 }
-export {CreateCategoryUserCase}
+export { CreateCategoryUserCase };

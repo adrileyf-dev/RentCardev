@@ -1,27 +1,30 @@
 version: '3.8'
+
 services:
   database_dev:
     image: postgres
     container_name: database_dev
     restart: always
     ports:
-      - 5438:5432
+      - 5438:5432 # Porta externa 5438 mapeada para a porta interna padrão do Postgres (5432)
     environment:
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_USER=admin
-      - POSTGRES_DB=dev
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: dev
     volumes:
       - ./data/db:/var/lib/postgresql/data
     networks:
       - devnet
 
   app:
-    build: .
+    build:
+      context: .
     container_name: rentex
     ports:
-      - 3000:3000
+      - 3000:3000 # Porta da aplicação
     volumes:
-      - .:/usr/app
+      - .:/usr/appdev
+      - /usr/appdev/node_modules # Evita conflito com node_modules local
     depends_on:
       - database_dev
     networks:

@@ -2,14 +2,14 @@ import { Router } from 'express';
 import { IndexcreateController } from '../modules/cars/useCases/CreateSpecification';
 import { IndexListController } from '../modules/cars/useCases/ListSpecification';
 
-const specificationsRoutes = Router();
+const SpecificationsRoutes = Router();
 
-specificationsRoutes.post('/', (request, response) => {
+SpecificationsRoutes.post('/', (request, response) => {
   return IndexcreateController.handle(request, response);
 });
-specificationsRoutes.get('/all', (request, response) => {
+SpecificationsRoutes.get('/all', (request, response) => {
   return IndexListController.handle(request, response);
 });
-export { specificationsRoutes };
+export { SpecificationsRoutes };
 
 // Swagger setup

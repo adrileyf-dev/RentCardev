@@ -1,13 +1,15 @@
-import { Request ,Response} from 'express';
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import { CreateCategoryUserCase } from './CreateCategoryUserCase';
 
-class CreateCategoryContoller{
-     constructor(private createCategoryUserCase : CreateCategoryUserCase){
-     }
-        handle(request:Request, response :Response) : Response{
-            const {name,description} = request.body;  
-            this.createCategoryUserCase.execute({name,description});   
-        return response.status(201).send();
-    }    
+class CreateCategoryContoller {
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { name, description } = request.body;
+    /// injeção automomatica
+    const createCategoryUserCase = container.resolve(CreateCategoryUserCase);
+
+    await createCategoryUserCase.execute({ name, description });
+    return response.status(201).send();
+  }
 }
-export {CreateCategoryContoller}
+export { CreateCategoryContoller };
