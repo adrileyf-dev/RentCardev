@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import { IndexcreateController } from '../modules/cars/useCases/CreateSpecification';
-import { IndexListController } from '../modules/cars/useCases/ListSpecification';
+
+import { CreateController } from '../modules/cars/useCases/CreateSpecification/CreateController';
+import { ListController } from '../modules/cars/useCases/ListSpecification/ListController';
 
 const SpecificationsRoutes = Router();
+const createController = new CreateController();
+const listController = new ListController();
 
-SpecificationsRoutes.post('/', (request, response) => {
-  return IndexcreateController.handle(request, response);
-});
-SpecificationsRoutes.get('/all', (request, response) => {
-  return IndexListController.handle(request, response);
-});
+SpecificationsRoutes.post('/', createController.handle);
+
+SpecificationsRoutes.get('/all', listController.handle);
 export { SpecificationsRoutes };
 
 // Swagger setup

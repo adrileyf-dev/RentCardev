@@ -1,12 +1,12 @@
-import { CreateService } from "./CreateService";
-import { Request ,Response} from 'express';
-class CreateController{
-  constructor(private createService: CreateService) {
-  }
-   handle(request:Request,  response :Response):Response{
-      const{name,description} = request.body;
-      this.createService.execute({name,description});
+import { CreateService } from './CreateService';
+import { container } from 'tsyringe';
+import { Request, Response } from 'express';
+class CreateController {
+  async handle(request: Request, response: Response): Promise<Response> {
+    const createService = container.resolve(CreateService);
+    const { name, description } = request.body;
+    await createService.execute({ name, description });
     return response.status(201).send();
-   }
+  }
 }
-export {CreateController}
+export { CreateController };

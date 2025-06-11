@@ -1,15 +1,24 @@
+import { inject, injectable } from 'tsyringe';
+import { IcreateSpecificationsDto } from '../../../../Dto/ICreateSpecificationsDto';
+import { ISpecificationsRepositories } from '../../Interface/ISpecificationsRepositories';
 
-import { IcreateSpecificationsDto } from "../../../../Dto/ICreateSpecificationsDto";
-import { ISpecificationsRepositories } from "../../Interface/ISpecificationsRepositories";
-
+@injectable()
 class CreateService {
-    constructor(private specificationsRepositories:ISpecificationsRepositories ){}
-    execute({name,description}:IcreateSpecificationsDto):void{
-        const categoryAlreadExists  = this.specificationsRepositories.findByName(name);
-             if(categoryAlreadExists) {
-                throw new Error("Specifications Already existe!")
-             }
-             this.specificationsRepositories.create({name,description});
+  constructor(
+    @inject('SpecificationsRepositories')
+    private specificationsRepositories: ISpecificationsRepositories,
+  ) {}
+  async execute({
+    name,
+    description,
+  }: IcreateSpecificationsDto): Promise<void> {
+    const categoryAlreadExists =
+      await this.specificationsRepositories.findByName(name);
+    if (categoryAlreadExists) {
+      throw new Error('Specifications Already existe!');
     }
+    await this.specificationsRepositories.findByName(name);
+    this.specificationsRepositories.create({ name, description });
+  }
 }
-export {CreateService}
+export { CreateService };
