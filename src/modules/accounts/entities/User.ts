@@ -10,7 +10,7 @@ import { v4 as uuidV4 } from 'uuid';
 @Entity('Users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  private id: string;
+  public id: string;
 
   @Column()
   public name: string;

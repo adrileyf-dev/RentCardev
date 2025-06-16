@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import { hash } from 'bcrypt';
-
 import { IUserRepository } from '../repositories/IUserRepository';
 import { ICreateUserDto } from '../Dtos/ICreateUserDto';
+
 @injectable()
 class ServiceCreate {
   constructor(
