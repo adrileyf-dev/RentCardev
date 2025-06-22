@@ -9,6 +9,7 @@ interface IRequest {
   email: string;
   password: string;
 }
+
 @injectable()
 class AuthenticateServiceUser {
   constructor(
@@ -30,8 +31,8 @@ class AuthenticateServiceUser {
     });
 
     const tokenReturn: IUserResponse = {
-      token,
       user: { name: user.name, email: user.email },
+      token,
     };
     return tokenReturn;
   }
