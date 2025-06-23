@@ -4,15 +4,9 @@ import { ServiceCreate } from '../services/ServiceCreate';
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, email, password, driver_license } = request.body;
+    const userData = request.body;
     const serviceCreate = container.resolve(ServiceCreate);
-
-    await serviceCreate.execute({
-      name,
-      email,
-      password,
-      driver_license,
-    });
+    await serviceCreate.execute(userData);
     return response.status(201).send();
   }
 }

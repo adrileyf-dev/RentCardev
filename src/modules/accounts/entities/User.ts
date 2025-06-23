@@ -25,7 +25,7 @@ export class User {
   public driver_license: string;
 
   @Column({ default: false })
-  private isAdmin: boolean;
+  public isAdmin: boolean;
 
   @Column({ default: false })
   public avatar: string;

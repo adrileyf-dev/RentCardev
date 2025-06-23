@@ -13,4 +13,7 @@ export class CarsRepository implements ICarsRepository {
     const car = this.repository.create(Cardata);
     await this.repository.save(car);
   }
+  async findByLicensePlate(license_plate: string): Promise<Car> {
+    return await this.repository.findOne({ where: { license_plate } });
+  }
 }

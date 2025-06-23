@@ -3,5 +3,6 @@ interface ICreateUserDto {
   email: string;
   password: string;
   driver_license: string;
+  isAdmin: boolean;
 }
 export { ICreateUserDto };
