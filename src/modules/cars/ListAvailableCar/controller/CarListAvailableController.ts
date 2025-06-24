@@ -7,9 +7,9 @@ export class CarListAvailableController {
     const { brand, name, category_id } = request.query;
     const listServiceAvliable = container.resolve(ListaAvailbleServiceCar);
     const cars = await listServiceAvliable.execute({
-      brand,
-      name,
-      category_id,
+      brand: brand as string,
+      name: name as string,
+      category_id: category_id as string,
     });
     return response.json(cars);
   }
