@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { CreateCarDTO } from '../../accounts/Dtos/IDtoCreateCars';
+import { ICreateCarDTO } from '../../accounts/Dtos/IDtoCreateCars';
 import { ICarsRepository } from './ICarsRepository';
 import Car from '../entities/Car';
 import { AppDataSource } from '../../../database/data-source';
@@ -9,7 +9,7 @@ export class CarsRepository implements ICarsRepository {
   constructor() {
     this.repository = AppDataSource.getRepository(Car);
   }
-  async create(Cardata: CreateCarDTO): Promise<void> {
+  async create(Cardata: ICreateCarDTO): Promise<void> {
     const car = this.repository.create(Cardata);
     await this.repository.save(car);
   }
